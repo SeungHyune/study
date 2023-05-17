@@ -1,0 +1,42 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(a, b, c){
+                let answer="YES", max;
+                max = Number.MIN_SAFE_INTEGER;
+                
+                // 가장 큰 길이 구하기
+                for(const a of arguments){
+                    if(max < a) max = a;
+                }
+
+                // 가장 큰 길이를 제외 한 두 길이의 합 구하기
+                let sum = 0;
+                for(const a of arguments){
+                    if(max !== a) sum += a;
+                }
+
+                answer = sum > max ? 'YES' : 'NO';  
+                return answer;
+            }
+
+            console.log(solution(6, 7, 11));
+
+            function solution2(a,b,c){
+                let answer='YES', max=Number.MIN_SAFE_INTEGER;
+                let sum = a+b+c;
+                for(const a of arguments){
+                    if(max < a) max = a;
+                }
+
+                if((sum - max) <= max) answer = 'NO'; 
+                return answer;
+            }
+            console.log(solution2(13,33,17));
+        </script>
+    </body>
+</html>

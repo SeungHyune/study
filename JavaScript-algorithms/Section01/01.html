@@ -1,0 +1,20 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(a, b, c){
+                let answer = Number.MAX_SAFE_INTEGER;
+                let arr = arguments;
+                for(const a of arr) {
+                    if(answer > a) answer = a;
+                }
+                return answer
+            }
+
+            console.log(solution(6, 5, 11));
+        </script>
+    </body>
+</html>
