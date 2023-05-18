@@ -5,9 +5,10 @@
     </head>
     <body>
         <script>
-            function solution(n){
+            function solution(arr){
                 let answer = Number.MAX_SAFE_INTEGER;
-                for(const a of n) {
+                let result = Math.min(...arr)
+                for(const a of arr) {
                     if (answer > a) answer = a;
                 }
                 return answer;

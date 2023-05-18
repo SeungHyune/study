@@ -1,0 +1,22 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(str){
+                let answer = str.replaceAll('A', '#');
+                let res = "";
+                for(const a of str) {
+                    if(a === "A") res += '#'
+                    else res += a;
+                }
+                console.log(res)
+                return answer;
+            }
+            
+            console.log(solution("BANANA"));
+        </script>
+    </body>
+</html>

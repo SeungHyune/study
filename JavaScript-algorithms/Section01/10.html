@@ -1,0 +1,21 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(str, s){
+                let answer = 0;
+                let res = str.split(s);
+                console.log(res)
+                for(const a of str){
+                    if(a === s) answer += 1; 
+                }
+                return answer;
+            }
+            
+            console.log(solution("COMPUTERPRRROGRAMMINGRR", "R"));
+        </script>
+    </body>
+</html>
