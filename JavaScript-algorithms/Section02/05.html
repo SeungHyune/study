@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(arr){         
+                let answer = Array.from({length:arr.length}, ()=>1)
+                for(let i=0;i<arr.length;i++){
+                    for(let a=0;a<arr.length;a++){
+                        if(arr[i] < arr[a]){
+                            answer[i] += 1;
+                        }
+                    }
+                }
+                return answer
+                // let answer = new Array(arr.length).fill(0);
+                // let max = Math.max.apply(null, arr);
+                // let cnt = 1;
+                // for(const a of answer){
+                //     if(answer.indexOf(0) > -1){
+                //         for(let i=0;i<arr.length;i++){
+                //             if(max === arr[i]){
+                //                 answer[i] = cnt;
+                //                 arr[i] = 0;
+                //             }
+                //         }
+                //         console.log(max,arr,cnt, answer)
+                //         cnt += answer.filter(n => n === cnt).length;
+                //         max = Math.max.apply(null, arr);
+                //     }
+                // }
+                // return answer;
+            }
+
+            let arr = [100,89,92,100,76,76,55,21,77];
+            console.log(solution(arr));
+        </script>
+    </body>
+</html>
