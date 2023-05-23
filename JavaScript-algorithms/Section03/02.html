@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(str){         
+                let answer = "YES";
+                let str1 = "";
+                let result1 = "", result2 = "";
+                let regex = /^[a-z|A-Z]+$/
+                for(const a of str){
+                    if(regex.test(a)){
+                        str1 += a.toLowerCase();
+                    }
+                }
+                
+                for(let i=0;i<str1.length/2;i++){
+                    result1 += str1[i];
+                }
+
+                for(let i=str1.length-1;i>=str1.length/2;i--){
+                    result2 += str1[i];
+                }
+
+                answer = result1 === result2 ? 'YES' : 'NO';
+                return answer;
+            }
+
+            let str="found7, time: study; Yduts; emit, 7Dnuof";
+            console.log(solution(str));
+        </script>
+    </body>
+</html>

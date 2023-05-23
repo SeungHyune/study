@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(str){         
+                let answer = "YES";
+                let str1 = "";
+                let str2 = "";
+                
+                for(let i=0;i<str.length/2;i++){
+                    str1 += str[i].toLowerCase();
+
+
+                }
+                for(let i=str.length-1;i>=str.length/2;i--){
+                    str2 += str[i].toLowerCase();
+                }
+                
+                answer = str1 === str2 ? 'YES' : 'NO' 
+                return answer;
+            }
+
+            let str="AbcdDCbA";
+            console.log(solution(str));
+        </script>
+    </body>
+</html>
