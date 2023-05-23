@@ -7,19 +7,35 @@
         <script>
             function solution(str){         
                 let answer = "YES";
-                let str1 = "";
-                let str2 = "";
+                str = str.toLowerCase();
+
+                // 3
+                str = str.split('');
+                console.log(str)
+                let s1 = str.slice(0, str.length/2);
+                let s2 = str.slice(str.length/2).reverse();
+
+                answer = s1.join('') === s2.join('') ? 'YES' : 'NO';
+
+                // 1
+                // for(let i=0;i<Math.floor(str.length / 2);i++){
+                //     if(str[i] !== str[str.length - (1 + i)]) return answer = "NO"
+                // }
+
+                // 2
+                // let str1 = "";
+                // let str2 = "";
                 
-                for(let i=0;i<str.length/2;i++){
-                    str1 += str[i].toLowerCase();
+                // for(let i=0;i<str.length/2;i++){
+                //     str1 += str[i].toLowerCase();
 
 
-                }
-                for(let i=str.length-1;i>=str.length/2;i--){
-                    str2 += str[i].toLowerCase();
-                }
+                // }
+                // for(let i=str.length-1;i>=str.length/2;i--){
+                //     str2 += str[i].toLowerCase();
+                // }
                 
-                answer = str1 === str2 ? 'YES' : 'NO' 
+                // answer = str1 === str2 ? 'YES' : 'NO' 
                 return answer;
             }
 

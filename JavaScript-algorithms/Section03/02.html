@@ -16,15 +16,19 @@
                     }
                 }
                 
-                for(let i=0;i<str1.length/2;i++){
-                    result1 += str1[i];
+                // 1
+                for(let i=0;i<Math.floor(str1.length/2);i++){
+                    if(str1[i] !== str1[str1.length - 1 - i]) return 'NO';
                 }
 
-                for(let i=str1.length-1;i>=str1.length/2;i--){
-                    result2 += str1[i];
-                }
-
-                answer = result1 === result2 ? 'YES' : 'NO';
+                //2
+                // for(let i=0;i<Math.floor(str1.length/2);i++){
+                //     result1 += str1[i]
+                // }
+                // for(let i=str1.length-1;i>=Math.floor(str1.length/2);i--){
+                //     result2 += str1[i]
+                // }
+                // answer = result1 === result2 ? 'YES' : 'NO';
                 return answer;
             }
 

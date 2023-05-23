@@ -7,13 +7,19 @@
         <script>
             function solution(str){         
                 let answer = "";
-                let regexp = /^[0-9]+$/;
+                // let regexp = /^[0-9]+$/;
+                // for(const a of str){
+                //     if(regexp.test(a)){
+                //         if(answer[0] !== undefined) answer += a;
+                //         else if(a > 0) answer += a;
+                //     }
+                // } 
                 for(const a of str){
-                    if(regexp.test(a)){
+                    if(!isNaN(a)){
                         if(answer[0] !== undefined) answer += a;
                         else if(a > 0) answer += a;
                     }
-                } 
+                }
                 return answer;
             }
 
