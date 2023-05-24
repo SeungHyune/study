@@ -1,0 +1,51 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(num){         
+                let answer = [];
+                // let cnt = "";
+                let chk = true;
+                for(let a of num){
+                    const item = String(a);
+                    // let res = Number(a.toString().split('').reverse().join(''));
+                    // console.log(res);
+                    
+                    let res = 0;
+                    while(a){
+                        let t = a % 10;
+                        res = res * 10 + t;
+                        a = Math.floor(a / 10);
+                    }
+
+                    // for(let i=item.length - 1;i>=0;i--){
+                    //     if(cnt[0] !== undefined){
+                    //         cnt += item[i];
+                    //     } else if(item[i] > 0){
+                    //         cnt += item[i];
+                    //     }
+                    // }
+
+                    for(let i=2;i<=Math.floor(res/2);i++){
+                        if(res % i === 0) {
+                            chk = false;
+                            break;
+                        }
+                    }
+
+                    if(chk && res > 1) answer.push(res);
+
+                    // cnt = "";
+                    chk = true;
+                }
+                return answer;
+            }
+
+            let num = [32,55,62,20,250,370,200,30,100];
+            console.log(solution(num));
+        </script>
+    </body>
+</html>
