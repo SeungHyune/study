@@ -1,0 +1,50 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(s){         
+                let answer = "";
+                s = s + " "
+                console.log(s)
+                let chk = 1;
+                for(let i=0;i<s.length - 1;i++){
+                    if(s[i] === s[i+1]){
+                        chk += 1;
+                    } else {
+                        answer += s[i];
+                        if(chk > 1){
+                            answer += String(chk);
+                        }
+                        chk = 1;
+                    }
+                }
+                // let start = s[0];
+                // let cnt = 0;
+
+                // for(const a of s){
+                //     if(start === a){
+                //         cnt += 1;
+                //     } else {
+                //         answer += start;
+                //         start = a;
+                //         if(cnt > 1){
+                //             answer += String(cnt);
+                //         }
+                //         cnt = 1;
+                //     }
+                // }
+
+                // if(cnt > 1) answer += start + cnt;
+                // else answer += start;
+                
+                return answer;
+            }
+
+            let str="KKHSSSSSSSE";
+            console.log(solution(str));
+        </script>
+    </body>
+</html>

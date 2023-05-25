@@ -1,0 +1,46 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(s, t){         
+                let answer = "" + s.indexOf(t);
+                let index = s.indexOf(t);
+                for(let i=1;i<s.length;i++){
+                    if(s[i] === t){
+                        index = 0;
+                        answer += index;
+                    } else {
+                        index += 1;
+                        if(index > s.indexOf(t, i) - i) answer += s.indexOf(t, i) - i
+                        else answer += index;
+
+                        
+                    }
+                    console.log(index, s.indexOf(t, i) - i)
+                }
+                // let answer = "" + s.indexOf(t);
+                // let chk = s.indexOf(t);
+                // for(let i=1;i<s.length;i++){
+                //     if(s[i] === t){
+                //             chk = 0; 
+                //             answer += 0;
+                //     } else {
+                //         chk--;
+                //         if(s.indexOf(t, i) - i > Math.abs(chk)){
+                //             answer += Math.abs(chk);
+                //         } else {
+                //             answer += s.indexOf(t, i) - i; 
+                //         }
+                //     }
+                // }
+                return answer;
+            }
+
+            let str="teachermode";
+            console.log(solution(str, 'e'));
+        </script>
+    </body>
+</html>
