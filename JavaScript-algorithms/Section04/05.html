@@ -5,46 +5,26 @@
     </head>
     <body>
         <script>
-            function solution(s){         
-                let answer = "";
-                s = s + " "
-                console.log(s)
-                let chk = 1;
-                for(let i=0;i<s.length - 1;i++){
-                    if(s[i] === s[i+1]){
-                        chk += 1;
-                    } else {
-                        answer += s[i];
-                        if(chk > 1){
-                            answer += String(chk);
+            function solution(k, num){
+                let answer = [];
+                for(let i=0;i<num.length-2;i++){
+                    for(let a=i+1;a<num.length-1;a++){
+                        for(let j=a+1;j<num.length;j++){
+                            let sum = num[i] + num[a] + num[j];
+                            if(answer.indexOf(sum) === -1) answer.push(sum)
+                            
                         }
-                        chk = 1;
                     }
                 }
-                // let start = s[0];
-                // let cnt = 0;
-
-                // for(const a of s){
-                //     if(start === a){
-                //         cnt += 1;
-                //     } else {
-                //         answer += start;
-                //         start = a;
-                //         if(cnt > 1){
-                //             answer += String(cnt);
-                //         }
-                //         cnt = 1;
-                //     }
-                // }
-
-                // if(cnt > 1) answer += start + cnt;
-                // else answer += start;
+                answer.sort((a,b) => b-a);
+                // let set = new Set(answer)
+                // answer = Array(...set);
                 
-                return answer;
+                return answer[k-1];
             }
 
-            let str="KKHSSSSSSSE";
-            console.log(solution(str));
+            let num = [13,15,34,23,45,65,33,11,26,42];
+            console.log(solution(3, num));
         </script>
     </body>
 </html>

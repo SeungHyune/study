@@ -5,42 +5,40 @@
     </head>
     <body>
         <script>
-            function solution(s, t){         
-                let answer = "" + s.indexOf(t);
-                let index = s.indexOf(t);
-                for(let i=1;i<s.length;i++){
-                    if(s[i] === t){
-                        index = 0;
-                        answer += index;
-                    } else {
-                        index += 1;
-                        if(index > s.indexOf(t, i) - i) answer += s.indexOf(t, i) - i
-                        else answer += index;
-
-                        
+            function solution(money, arr){
+                let answer = Number.MIN_SAFE_INTEGER;
+                arr.sort((a,b)=>(a[0]+a[1])-(b[0]+b[1]))
+                console.log(arr)
+                for(let i=0;i<arr.length;i++){
+                    const item = (arr[i][0] / 2) + arr[i][1];
+                    
+                    let cnt = 1;
+                    let won = money - item;
+                    console.log(item, won)
+                    for(let j=0;j<arr.length;j++){
+                        if(i !== j && arr[j][0] + arr[j][1] > won) break;
+                        if(i !== j && arr[j][0] + arr[j][1] <= won){
+                                cnt += 1;
+                                won -= (arr[j][0] + arr[j][1]);
+                                console.log(won, arr[j][0] + arr[j][1], cnt)
+                        }
                     }
-                    console.log(index, s.indexOf(t, i) - i)
+
+                    if(answer < cnt) answer = cnt;
+                    cnt = 1;
+                    won = money;
                 }
-                // let answer = "" + s.indexOf(t);
-                // let chk = s.indexOf(t);
-                // for(let i=1;i<s.length;i++){
-                //     if(s[i] === t){
-                //             chk = 0; 
-                //             answer += 0;
-                //     } else {
-                //         chk--;
-                //         if(s.indexOf(t, i) - i > Math.abs(chk)){
-                //             answer += Math.abs(chk);
-                //         } else {
-                //             answer += s.indexOf(t, i) - i; 
-                //         }
-                //     }
-                // }
                 return answer;
             }
 
-            let str="teachermode";
-            console.log(solution(str, 'e'));
+            let arr = [
+                [6,6],
+                [2,2],
+                [4,3],
+                [4,5],
+                [10,3]
+            ];
+            console.log(solution(28, arr));
         </script>
     </body>
 </html>

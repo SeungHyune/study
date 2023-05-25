@@ -5,27 +5,42 @@
     </head>
     <body>
         <script>
-            function solution(str){         
-                let answer = "";
-                // let regexp = /^[0-9]+$/;
-                // for(const a of str){
-                //     if(regexp.test(a)){
-                //         if(answer[0] !== undefined) answer += a;
-                //         else if(a > 0) answer += a;
-                //     }
-                // } 
-                for(const a of str){
-                    if(!isNaN(a)){
-                        if(answer[0] !== undefined) answer += a;
-                        else if(a > 0) answer += a;
+            function solution(student, num){         
+                let answer = 0;
+                let arr = [];
+                for(let i=0;i<student;i++){
+                    arr.push(i+1);
+                }
+                let newArr = [...arr];
+                let chk = 0;
+                for(let i=1;i<=student;i++){
+                    for(const a of num){
+                        chk += 1;
+                        for(let j=0;j<a.length;j++){
+                            if(a.indexOf(i) <= j) {
+                                if(newArr.indexOf(a[j]) > -1){
+                                    newArr[newArr.indexOf(a[j])] = 0;
+                                }
+                            }
+                        }
+                        
+                        if(chk === 3){
+                            console.log(newArr)
+                            answer += newArr.filter(n => n !== 0).length
+                            newArr = [...arr];
+                            chk = 0;
+                        }
                     }
                 }
-                answer = parseInt(answer)
                 return answer;
             }
 
-            let str="g0en2T0s8eSoft";
-            console.log(solution(str));
+            let num = [
+                [3,4,1,2],
+                [4,3,2,1],
+                [3,1,4,2]
+            ];
+            console.log(solution(4, num));
         </script>
     </body>
 </html>
