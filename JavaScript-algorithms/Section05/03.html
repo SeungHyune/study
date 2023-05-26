@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(arr, m){         
+                let answer = 0;
+                for(let i=0;i<arr.length;i++){
+                    let num = m;
+                    for(let j=i;j<arr.length;j++){
+                        num -= arr[j];
+                        console.log(arr[j], num)
+                        if(num === 0) {
+                            answer += 1;
+                            break;
+                        } else if(num < 0){
+                            break;
+                        }
+                    }
+                }
+                return answer;
+            }
+
+            let arr = [1,2,1,3,1,1,1,2];
+            console.log(solution(arr, 6));
+        </script>
+    </body>
+</html>
