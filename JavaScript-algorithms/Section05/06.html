@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(s){         
+                let answer = "";
+                let obj = {}
+                let max = Number.MIN_SAFE_INTEGER;
+                for(const a of s){
+                    if(obj[a] === undefined) obj[a] = 0;
+                    obj[a] += 1;
+                }
+
+                for(let key in obj){
+                    if(max < obj[key]){
+                        max = obj[key];
+                        answer = key;
+                    }
+                }
+                return answer;
+            }
+
+            let str = "BACBACCACCBDEDE"
+            console.log(solution(str));
+        </script>
+    </body>
+</html>
