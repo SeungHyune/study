@@ -6,17 +6,36 @@
     <body>
         <script>
             function solution(arr, m){         
+                // let answer = 0;
+                // for(let i=0;i<arr.length;i++){
+                //     let num = m;
+                //     for(let j=i;j<arr.length;j++){
+                //         num -= arr[j];
+                //         console.log(arr[j], num)
+                //         if(num === 0) {
+                //             answer += 1;
+                //             break;
+                //         } else if(num < 0){
+                //             break;
+                //         }
+                //     }
+                // }
+                // return answer;
+                
                 let answer = 0;
-                for(let i=0;i<arr.length;i++){
-                    let num = m;
-                    for(let j=i;j<arr.length;j++){
-                        num -= arr[j];
-                        console.log(arr[j], num)
-                        if(num === 0) {
+                let lt = 0;
+                let sum = 0;
+                for(let rt=0;rt<arr.length;rt++){
+                    sum += arr[rt];
+                    if(sum === m) {
+                        answer += 1;
+                        console.log(lt,rt)
+                    }
+                    while(sum >= m){
+                        sum -= arr[lt++];
+                        if(sum === m) {
                             answer += 1;
-                            break;
-                        } else if(num < 0){
-                            break;
+                            console.log(lt, rt)
                         }
                     }
                 }
