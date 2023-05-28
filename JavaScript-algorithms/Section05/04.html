@@ -6,23 +6,53 @@
     <body>
         <script>
             function solution(arr, m){         
-                let answer = 0;
-                for(let i=0;i<arr.length;i++){
-                    let tmp = i + 1;
-                    let res = true;
-                    while(res){
-                        let sum = 0;
-                        for(let j=i;j<tmp;j++){
-                            sum += arr[j]
-                        }
+                // let answer = 0;
+                // for(let i=0;i<arr.length;i++){
+                //     let tmp = i + 1;
+                //     let res = true;
+                //     while(res){
+                //         let sum = 0;
+                //         for(let j=i;j<tmp;j++){
+                //             sum += arr[j]
+                //         }
 
-                        if(sum <= 5){
-                            answer += 1;
-                        } else {
-                            res = false;
-                        }
-                        tmp += 1;
+                //         if(sum <= 5){
+                //             answer += 1;
+                //         } else {
+                //             res = false;
+                //         }
+                //         tmp += 1;
+                //     }
+                // }
+                // return answer;
+
+                // let answer = 0;
+                // let lt=rt=0;
+                // let sum = 0;
+                // while(lt < arr.length){
+                //     sum += arr[rt]
+                //     if(sum <= m){
+                //         answer += 1;
+                //         rt += 1;
+                //     } else{
+                //         lt += 1;
+                //         rt = lt;
+                //         sum = 0; 
+                //     }
+                //     console.log(sum)
+                // }
+                // return answer;
+
+                let answer = 0;
+                let lt = 0;
+                let sum = 0;
+                for(let rt=0;rt<arr.length;rt++){
+                    sum += arr[rt];
+                    while(sum > m){
+                        sum -= arr[lt++];
                     }
+                    answer += (rt-lt)+1;
+                    console.log(answer)
                 }
                 return answer;
             }
