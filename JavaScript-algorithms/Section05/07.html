@@ -5,31 +5,67 @@
     </head>
     <body>
         <script>
-            function solution(s1, s2){         
+            function solution(s1, s2){      
                 let answer = "YES";
-                let obj1 = {};
-                let obj2 = {};
-
-                for(let i=0;i<s1.length;i++){
-                    if(obj1[s1[i]] === undefined){
-                        obj1[s1[i]] = 0;
-                    }
-                    obj1[s1[i]] += 1;
-
-                    if(obj2[s2[i]] === undefined){
-                        obj2[s2[i]] = 0;
-                    }
-                    obj2[s2[i]] += 1;
+                let map = new Map();
+                for(const a of s1){
+                    if(map.has(a)) map.set(a, map.get(a) + 1);
+                    else map.set(a, 1);
                 }
+
+                for(const a of s2){
+                    if(map.get(a) > 0) map.set(a, map.get(a) - 1);
+                    else return 'NO';
+                }
+
                 
-                for(let key in obj1){
-                    if(obj1[key] !== obj2[key]) answer = "NO";
-                }
+                // let obj1 = {};
+                // let obj2 = {};
+
+                // for(let i=0;i<s1.length;i++){
+                //     if(obj1[s1[i]] === undefined){
+                //         obj1[s1[i]] = 0;
+                //     }
+                //     obj1[s1[i]] += 1;
+
+                //     if(obj2[s2[i]] === undefined){
+                //         obj2[s2[i]] = 0;
+                //     }
+                //     obj2[s2[i]] += 1;
+                // }
+                // console.log(obj1, obj2)
+                // for(let key in obj1){
+                //     if(obj1[key] !== obj2[key]) answer = "NO";
+                // }
+
+                
+                // let str1 = "";
+                // let str2 = "";
+                // for(const [key, val] of map1){
+                //     for(let i=0;i<val;i++){
+                //         str1 += key;
+                //     }
+                // }
+                // for(const [key, val] of map2){
+                //     for(let i=0;i<val;i++){
+                //         str2 += key;
+                //     }
+                // }
+                // str1 = str1.split('').sort((a,b)=>{
+                //     if(a>b) return 1;
+                //     else return -1;
+                // }).join('');
+                // str2 = str2.split('').sort((a,b)=>{
+                //     if(a>b) return 1;
+                //     else return -1;
+                // }).join('');
+                
+                // answer = str1 === str2 ? 'YES' : 'NO';
                 return answer;
             }
 
             let str1 = "abaCC";
-            let str2 = "Caaab"
+            let str2 = "Caaab";
             console.log(solution(str1, str2));
         </script>
     </body>

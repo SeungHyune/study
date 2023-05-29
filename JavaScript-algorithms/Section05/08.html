@@ -5,25 +5,78 @@
     </head>
     <body>
         <script>
-            function solution(s1, s2){         
-                let answer = 0;
-                let str1 = [];
-                let str2 = s2.split('').sort((a,b)=> {
-                    if(a > b) return 1;
-                    else return -1;
-                }).join('');
-                for(let i=0;i<s1.length;i++){
-                    for(let j=i;j<s2.length+i;j++){
-                        str1.push(s1[j]);
-                    }
-                    str1.sort((a,b) => {
-                        if(a > b) return 1;
-                        else return -1;
-                    });
-                    console.log(str1.join(''), str2)
-                    if(str1.join('') === str2) answer += 1;
-                    str1 = [];
+            function mapCompare(map1, map2){
+                if(map1.size !== map2.size) return false;
+                for(const [key,val] of map2){
+                    if(!map1.has(key) || map1.get(key) !== val) return false;
                 }
+                return true;
+            }
+
+            function solution(s1, s2){         
+                // let answer = 0;
+                // let str1 = [];
+                // let str2 = s2.split('').sort((a,b)=> {
+                //     if(a > b) return 1;
+                //     else return -1;
+                // }).join('');
+                // for(let i=0;i<s1.length;i++){
+                //     for(let j=i;j<s2.length+i;j++){
+                //         str1.push(s1[j]);
+                //     }
+                //     str1.sort((a,b) => {
+                //         if(a > b) return 1;
+                //         else return -1;
+                //     });
+                //     console.log(str1.join(''), str2)
+                //     if(str1.join('') === str2) answer += 1;
+                //     str1 = [];
+                // }
+                // return answer;
+
+                // let answer = 0;
+                // let str1 = [];
+                // for(let i=0;i<s2.length;i++){
+                //     str1.push(s1[i]);
+                // }
+                // str1.sort()
+                // let str2 = s2.split('').sort()
+
+                // for(let i=s2.length;i<s1.length;i++){
+                //     if(str1.join('') === str2.join('')) answer += 1;
+                //     str1.push(s1[i]);
+                //     str1.shift();
+                //     str1.sort();
+                // }
+                // return answer;
+            
+                let answer = 0;
+                let sH = new Map();
+                for(let i=0;i<s2.length-1;i++){
+                    if(sH.has(s1[i])) sH.set(s1[i], sH.get(s1[i])+1);
+                    else sH.set(s1[i],1);
+                }
+                let tH = new Map();
+                for(const a of s2){
+                    if(tH.has(a)) tH.set(a, tH.get(a)+1);
+                    else tH.set(a,1);
+                }
+                
+                let lt = 0;
+                for(let rt=s2.length-1;rt<s1.length;rt++){
+                    const a = s1[rt];
+                    if(sH.has(a)) sH.set(a, sH.get(a)+1);
+                    else sH.set(a,1);
+
+                    if(mapCompare(sH, tH)) answer += 1;
+                    console.log(sH, tH)
+                    
+                    sH.set(s1[lt], sH.get(s1[lt]) - 1);
+                    if(sH.get(s1[lt]) === 0) sH.delete(s1[lt])
+                    lt += 1;
+                }
+                
+
                 return answer;
             }
 
