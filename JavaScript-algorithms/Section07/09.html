@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(arr){
+                let answer = Number.MIN_SAFE_INTEGER;
+                let newArr = [];
+                for(let i=0;i<arr.length;i++){
+                    newArr.push([arr[i][0], 's']);
+                    newArr.push([arr[i][1], 'e']);
+                }
+                newArr.sort((a,b)=>{
+                    if(a[0] === b[0]) return a[1].charCodeAt() - b[1].charCodeAt();
+                    else return a[0] - b[0]
+                })
+                console.log(newArr);
+                let sum = 0
+                for(const a of newArr){
+                    if(a[1] === 's') sum += 1;
+                    else sum -= 1;
+                    answer = Math.max(sum, answer);
+                }
+                return answer;
+            }
+            let arr = [
+                [14,18],
+                [12,15],
+                [15,20],
+                [20,30],
+                [5,14]
+            ]
+            console.log(solution(arr));
+        </script>
+    </body>
+</html>
