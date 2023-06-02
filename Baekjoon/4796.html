@@ -1,0 +1,21 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>캠핑</title>
+    </head>
+    <body>
+        <script>
+            function solution(l,p,v){
+                let answer = 0;
+                while(v > p){
+                    v -= p;
+                    answer += l;
+                }
+                answer += v > l ? l : v
+                return answer;
+            }
+            
+            console.log(solution(2,8,19));
+        </script>
+    </body>
+</html>

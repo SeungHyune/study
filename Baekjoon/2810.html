@@ -1,0 +1,35 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>컵홀더</title>
+    </head>
+    <body>
+        <script>
+            function solution(str){
+                let answer = 0;
+                let count = 0;
+                for(const a of str){
+                    if(a === "L") count += 1;
+                    else answer += 1;
+                }
+                if(count > 0) answer += (count / 2) + 1;
+                // let chk = 0;
+                // for(const a of str){
+                //     if(a === 'S') answer += 1;
+                //     else if(a === 'L'){
+                //         chk += 1;
+                //         if(chk === 2) {
+                //             answer += 1;
+                //             chk = 0;
+                //         }
+                //     }
+                // }
+                // if(str.includes('L')) answer += 1;
+                return answer;
+            }
+            
+            let str = "SSSSSSSSSSLLLL"
+            console.log(solution(str));
+        </script>
+    </body>
+</html>

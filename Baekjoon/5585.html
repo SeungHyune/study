@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>거스름돈</title>
+    </head>
+    <body>
+        <script>
+            function solution(m){
+                let answer = 0;
+                let arr = [500,100,50,10,5,1];
+                let money = 1000 - m;
+                for(let i=0;i<arr.length;i++){
+                    let item = arr[i];
+                    if(money >= item){
+                        answer += Math.floor(money / item);
+                        // console.log(item, Math.floor(money / item));
+                        money = money % item;
+                    }
+                }
+                return answer;
+            }
+            
+            console.log(solution(1));
+        </script>
+    </body>
+</html>

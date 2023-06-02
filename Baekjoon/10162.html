@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>전자레인지</title>
+    </head>
+    <body>
+        <script>
+            function solution(time){
+                let answer = [];
+                let arr = [300,60,10];
+                for(let i=0;i<arr.length;i++){
+                    const item = arr[i];
+                    if(time >= item){
+                        answer.push(Math.floor(time / item));
+                        time = time % item;
+                    } else answer.push(0);
+                }
+
+                if(time > 0) return -1;
+                return answer;
+            }
+            
+            console.log(solution(180));
+        </script>
+    </body>
+</html>

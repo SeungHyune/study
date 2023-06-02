@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>세탁소 사장 동혁</title>
+    </head>
+    <body>
+        <script>
+            function solution(money){
+                let answer = [];
+                let arr = [25,10,5,1];
+                
+                for(let i=0;i<arr.length;i++){
+                    let cnt;
+                    let mm = arr[i];
+                    if(money >= mm){
+                        cnt = Math.floor(money / mm);
+                        money = money % mm;
+                        answer.push(cnt);
+                    } else answer.push(0);
+                }
+                return answer;
+            }
+            
+            console.log(solution(194));
+        </script>
+    </body>
+</html>
