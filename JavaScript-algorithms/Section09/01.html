@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(graph){
+                let n = graph.length;
+                let arr = Array.from({length:n+1}, ()=>Array(n+1).fill(0));
+                // 무방향 그래프(양방향)
+                // for(let i=0;i<n;i++){
+                //     arr[graph[i][0]][graph[i][1]] = 1;
+                //     arr[graph[i][1]][graph[i][0]] = 1;
+                // }
+
+                // 방향 그래프
+                // for(let i=0;i<n;i++){
+                //     arr[graph[i][0]][graph[i][1]] = 1;
+                // }
+
+                for(let i=0;i<n;i++){
+                    arr[graph[i][0]][graph[i][1]] = graph[i][2];
+                }
+                return arr;
+            }
+            
+            let graph1 = [[1,2],[1,3],[2,4],[2,5],[3,4]];
+            let graph2 = [[1,2,2],[1,3,4],[2,5,5],[3,4,5],[4,2,2]]
+            console.log(solution(graph2));
+        </script>
+    </body>
+</html>

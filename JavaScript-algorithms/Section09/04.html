@@ -1,0 +1,44 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(board){
+                let answer = 0;
+                let n = board.length-1;
+                let nx = [-1,0,1,0];
+                let ny = [0,1,0,-1];
+                function DFS(x,y){
+                    if(x === n && y === n){
+                        answer += 1;
+                    } else {
+                        for(let k=0;k<4;k++){
+                            let dx = x + nx[k];
+                            let dy = y + ny[k];
+                            if(dx >= 0 && dx <= n && dy >= 0 && dy <= n && board[dx][dy] === 0){
+                                board[dx][dy] = 1;
+                                DFS(dx,dy);
+                                board[dx][dy] = 0;
+                            }
+                        }
+                    }
+                }
+                board[0][0] = 1;
+                DFS(0,0)
+                return answer;
+            }
+            let graph4 = [
+                [0,0,0,0,0,0,0],
+                [0,1,1,1,1,1,0],
+                [0,0,0,1,0,0,0],
+                [1,1,0,1,0,1,1],
+                [1,1,0,0,0,0,1],
+                [1,1,0,1,1,0,0],
+                [1,0,0,0,0,0,0]
+            ]
+            console.log(solution(graph4));
+        </script>
+    </body>
+</html>
