@@ -1,0 +1,202 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(arr){
+                let n = arr.length;
+                let answer = Array.from({length:n+1}, ()=>Array(n+1).fill(0));
+                
+                // 무방향 그래프(양방향)
+                for(let i=0;i<arr.length;i++){
+                let [a,b] = arr[i]
+                    answer[a][b] = 1;
+                    answer[b][a] = 1;
+
+                }
+
+                // 방향 그래프(단방향)
+                // for(let i=0;i<arr.length;i++){
+                //     let [a,b] = arr[i];
+                //     answer[a][b] = 1;
+                // }
+
+                //가충치 방향그래프
+                // for(let i=0;i<arr.length;i++){
+                //     let [a,b,c] = arr[i]
+                //     answer[a][b] = c;
+                // }
+                
+                return answer;
+            }
+            
+            // let graph = [[1,2],[1,3],[2,4],[2,5],[3,4]];
+            let graph = [[1,2,2],[1,3,4],[2,5,5],[3,4,5],[4,2,2]]
+            // console.log(solution(graph));
+
+            function solution1(n,arr){
+                let answer = 0;
+                let graph = Array.from({length:n+1},()=>Array(n+1).fill(0));
+                let ch = Array.from({length:n+1}).fill(0);
+
+                for(const [a,b] of arr){
+                    graph[a][b] = 1;
+                }
+
+                let tmp = [];
+
+                function dfs(L){
+                    if(L === n) {
+                        answer++;
+                        console.log(tmp)
+                    } else {
+                        for(let i=1;i<=n;i++){
+                            if(ch[i] === 0 && graph[L][i] === 1){
+                                ch[i] = 1;
+                                tmp.push(i)
+                                dfs(i);
+                                ch[i] = 0;
+                                tmp.pop();
+                            }
+                        }
+                    }
+                }
+                ch[1] = 1;
+                tmp.push(1);
+                dfs(1)
+
+                return answer;
+            }
+
+            let graph1 = [
+                [1,2],
+                [1,3],
+                [1,4],
+                [2,1],
+                [2,3],
+                [2,5],
+                [3,4],
+                [4,2],
+                [4,5]
+            ]
+            // console.log(solution1(5, graph1))
+
+            function solution2(n, arr){
+                let answer = 0;
+                let graph = Array.from({length:n+1}, ()=> Array());
+                let ch = Array.from({length:n+1}).fill(0)
+                for(const [a,b] of arr){
+                    graph[a].push(b);
+                }
+
+                let tmp = [];
+                
+                function dfs(v){
+                    if(v===n){
+                        answer++;
+                        console.log(tmp)
+                    } else {
+                        for(let i=0;i<graph[v].length;i++){
+                            if(ch[graph[v][i]] === 0){
+                                ch[graph[v][i]] = 1;
+                                tmp.push(graph[v][i]);
+                                dfs(graph[v][i]);
+                                ch[graph[v][i]] = 0
+                                tmp.pop();
+                            }
+                        }
+                    }
+                }
+                tmp.push(1);
+                ch[1] = 1;
+                dfs(1);
+
+                return answer;
+            }
+            // console.log(solution2(5,graph1))
+
+            function solution3(arr){
+                let answer = 0;
+                let nx = [-1,0,1,0];
+                let ny = [0,1,0,-1];
+                
+                let tmp = [];
+
+                function dfs(x,y){
+                    if(x === 6 && y === 6){
+                        answer++;
+                        console.log(tmp);
+                    } else {
+                        for(let k=0;k<4;k++){
+                            let dx = x+nx[k];
+                            let dy = y+ny[k];
+                            if(dx >= 0 && dx <= 6 && dy >= 0 && dy <= 6 && arr[dx][dy] === 0){
+                                arr[dx][dy] = 1;
+                                tmp.push(arr[dx][dy])
+                                dfs(dx,dy);
+                                arr[dx][dy] = 0;
+                                tmp.pop();
+                            }
+                        }
+                    }
+                }
+                arr[0][0] = 1;
+                dfs(0,0);
+                
+                return answer;
+            }
+            let arr = [
+                [0,0,0,0,0,0,0],
+                [0,1,1,1,1,1,0],
+                [0,0,0,1,0,0,0],
+                [1,1,0,1,0,1,1],
+                [1,1,0,0,0,0,1],
+                [1,1,0,1,1,0,0],
+                [1,0,0,0,0,0,0]
+            ]
+            // console.log(solution3(arr))
+
+            function solution4(arr){
+                let answer = 0;
+                let n = arr.length;
+                let nx = [-1,-1,0,1,1,1,0,1]
+                let ny = [0,1,1,1,0,-1,-1,-1]
+                function dfs(x,y){
+                    arr[x][y] = 0;
+                    for(let k=0;k<8;k++){
+                        let dx = x+nx[k];
+                        let dy = y+ny[k];
+                        if(0 <= dx && dx <= 6 && 0 <= dy && dy <= 6 && arr[dx][dy] === 1){
+                            arr[dx][dy] = 0;
+                            dfs(dx,dy);
+                        }
+                    }
+                }
+
+                for(let i=0;i<n;i++){
+                    for(let j=0;j<n;j++){
+                        if(arr[i][j] === 1){
+                            dfs(i,j);
+                            answer++
+                        }
+                    }
+                }
+
+                console.log(arr)
+
+                return answer;
+            }
+
+            let arr1 = [[1,1,0,0,0,1,0],
+                        [0,1,1,0,1,1,0],
+                        [0,1,0,0,0,0,0],
+                        [0,0,0,1,0,1,1],
+                        [1,1,0,1,1,0,0],
+                        [1,0,0,0,1,0,0],
+                        [1,0,1,0,1,0,0]]
+            console.log(solution4(arr1))
+        </script>
+    </body>
+</html>
