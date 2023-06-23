@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            function solution(arr, n){
+                let answer = 0;
+                let dy = Array.from({length:n+1}, ()=>100);
+                dy[0] = 0;
+                
+                for(let i=0;i<arr.length;i++){
+                    for(let j=arr[i];j<=n;j++){
+                        if(dy[j-arr[i]]+1 < dy[j]){
+                            dy[j] = dy[j-arr[i]] + 1;
+                        }
+                    }
+                }
+
+                answer = dy[n];
+                return answer;
+            }
+
+            console.log(solution([1,2,5], 15));
+        </script>
+    </body>
+</html>
