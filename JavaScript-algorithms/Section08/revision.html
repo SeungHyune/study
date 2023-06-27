@@ -159,7 +159,27 @@
 
                 return answer;
             }
-            console.log(solution7(3,2))
+            console.log(solution7(3,2));
+
+            function solution8(arr, m){
+                let answer = Number.MAX_SAFE_INTEGER;
+                let n = arr.length;
+                let ch = Array.from({length:n}, ()=>0);
+
+                function dfs(L, sum){
+                    if(sum > m) return;
+                    if(sum === m) {
+                        answer = Math.min(answer, L);
+                    } else {
+                        for(let i=0;i<n;i++){
+                            dfs(L+1, sum+arr[i])
+                        }
+                    }
+                }
+                dfs(0,0)
+                return answer;
+            }
+            console.log(solution8([1,2,5], 15));
         </script>
     </body>
 </html>
