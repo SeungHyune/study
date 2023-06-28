@@ -204,7 +204,115 @@
                 return answer;
             }
 
-            console.log(solution9([3,6,9], 2))
+            console.log(solution9([3,6,9], 2));
+
+            function solution10(n){
+                let answer = 0;
+                function dfs(L, sum){
+                    if(L === 1) {
+                        return answer = sum
+                    } else {
+                        dfs(L-1, sum*L);
+                    }
+                }
+                dfs(n, 1)
+                return answer;
+            }
+            console.log(solution10(5));
+
+            function solution11(n,r){
+                let answer = 0;
+                let dp = Array.from({length:n+1}, ()=>Array(n+1).fill(0));
+                function dfs(n,r){
+                    if(dp[n][r] > 0) return dp[n][r];
+                    if(n === r  || r === 0) return 1;
+                    else {
+                        return dp[n][r] = dfs(n-1, r-1) + dfs(n-1, r);
+                    }
+                }
+                answer = dfs(n,r);
+                return answer;
+            }
+            console.log(solution11(33,19));
+
+            function solution12(n,f){
+                let answer = [];
+                let tmp = Array.from({length:n}, ()=>0);
+                let ch = Array.from({length:n+1}, ()=>0);
+
+                let flag = 0;
+                function dfs(L){
+                    if(flag) return;
+                    if(L === n){
+                        let arr = [...tmp]
+                        while(arr.length !== 1){
+                            for(let i=0;i<arr.length-1;i++){
+                                arr[i] = arr[i] + arr[i+1];
+                            }
+                            arr.pop();
+                        }
+                        if(arr.length === 1 && f === arr[0]) {
+                            answer = tmp.slice();
+                            flag = 1;
+                        }
+
+                    } else {
+                        for(let i=1;i<=n;i++){
+                            if(ch[i] === 0){
+                                ch[i] = 1;
+                                tmp[L] = i;
+                                dfs(L+1);
+                                ch[i] = 0;
+                            }
+                        }
+                    }
+                }
+                dfs(0)
+
+                return answer;
+            }
+            console.log(solution12(4,16));
+
+            function solution13(n,m){
+                let answer = [];
+                let tmp = Array.from({length:m}, ()=>0);
+
+                // 조합(M개 뽑는 방법의 수)
+                function dfs(L,s){
+                    if(L===m){
+                        answer.push(tmp.slice());
+                    } else {
+                        for(let i=s;i<=n;i++){
+                            tmp[L] = i;
+                            dfs(L+1, i+1);
+                        }
+                    }
+                }
+                dfs(0,1)
+                return answer;
+            }
+            console.log(solution13(4,2));
+
+            function solution14(arr,k,m){
+                let answer = 0;
+                let n = arr.length;
+                let tmp = Array.from({length:k}, ()=>0);
+
+                // 조합(k개 뽑는 방법 중에 뽑은 원소의 합이 m의 배수인 조합 수 찾기)
+                function dfs(L,s,sum){
+                    if(L === k){
+                        if(sum % m === 0) answer++;
+                    } else {
+                        for(let i=s;i<n;i++){
+                            tmp[L] = arr[i];
+                            dfs(L+1, i+1, sum+arr[i]);                            
+                        }
+                    }
+                }
+                dfs(0,0,0)
+                return answer;
+            }
+            console.log(solution14([2,4,5,8,12],3,6));
         </script>
     </body>
 </html>
