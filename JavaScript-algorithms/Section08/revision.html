@@ -168,6 +168,7 @@
 
                 function dfs(L, sum){
                     if(sum > m) return;
+                    if(L>=answer) return;
                     if(sum === m) {
                         answer = Math.min(answer, L);
                     } else {
@@ -207,15 +208,12 @@
             console.log(solution9([3,6,9], 2));
 
             function solution10(n){
-                let answer = 0;
-                function dfs(L, sum){
-                    if(L === 1) {
-                        return answer = sum
-                    } else {
-                        dfs(L-1, sum*L);
-                    }
+                let answer;
+                function dfs(n){
+                    if(n === 1) return 1;
+                    else return n * dfs(n-1);
                 }
-                dfs(n, 1)
+                answer = dfs(n)
                 return answer;
             }
             console.log(solution10(5));
