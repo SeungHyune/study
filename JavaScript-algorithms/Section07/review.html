@@ -1,0 +1,139 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>출력결과</title>
+    </head>
+    <body>
+        <script>
+            // 선택 정렬
+            function solution(arr){
+                for(let i=0;i<arr.length-1;i++){
+                    let idx = i;
+                    for(let j=i+1;j<arr.length;j++){
+                        if(arr[idx] > arr[j]){
+                            idx = j;
+                        }
+                    }
+                    // console.log(idx)
+                    [arr[i], arr[idx]] = [arr[idx], arr[i]];
+                    console.log(idx)
+                }
+                return arr
+            }
+            // console.log(solution([13,5,11,7,23,15]));
+
+            // 버블 정렬
+            function solution1(arr){
+                let answer = arr;
+                for(let i=0;i<arr.length-1;i++){
+                    for(let j=0;j<arr.length-i-1;j++){
+                        if(arr[j] > arr[j+1]){
+                            [arr[j], arr[j+1]] = [arr[j+1], arr[j]]
+                        }
+                    }
+                }
+                return answer;
+            }
+            // console.log(solution1([13,5,11,7,23,15]));
+
+            function solution2(arr){
+                let answer = arr;
+
+                // 버블 정렬
+                for(let i=0;i<arr.length-1;i++){
+                    for(let j=0;j<arr.length-i-1;j++){
+                        if(arr[j] > 0 && arr[j+1] < 0){
+                            [arr[j], arr[j+1]] = [arr[j+1], arr[j]];
+                        }
+                    }
+                }
+
+                return answer
+            }
+            // console.log(solution2([1,2,3,-3,-2,5,6,-6]));
+
+            // 삽입 정렬
+            function solution3(arr){
+                let answer = arr;
+                for(let i=1;i<arr.length;i++){
+                    let tmp = arr[i], j;
+                    for(j=i-1;j>=0;j--){
+                        if(tmp < arr[j]){
+                            arr[j+1] = arr[j];
+                        } else {
+                            break;
+                        }
+                    }
+                    arr[j+1] = tmp;
+                    console.log(arr); 
+                }
+                return arr;
+            }
+            console.log(solution3([11,7,5,6,10,9]));
+
+            function solution4(arr, m){
+                let answer = [];
+
+                
+                arr.forEach(v => {
+                    let flag = 0;
+                    let idx;
+                    for(let i=0;i<answer.length;i++){
+                        if(answer[i] === v) {
+                            flag = 1;
+                            idx = i;
+                        }
+                    }
+
+                    if(flag){
+                        // Cache Hit
+                        for(let i=idx-1;i>=0;i--){
+                            answer[i+1] = answer[i];
+                        }
+                    } else {
+                        // Cache Miss
+                        if(answer.length >= m){
+                            for(let i=answer.length-2;i>=0;i--){
+                                answer[i+1] = answer[i];
+                            }
+                        } else {
+                            answer.unshift(v);
+                        }
+                    }
+                    answer[0] = v;
+                })
+
+                // function cacheHit(id, num){
+                //     for(let i=id-1;i>=0;i--){
+                //         answer[i+1] = answer[i];
+                //     }
+                //     answer[0] = num;
+                // }
+
+                // function cacheMiss(num){
+                //     answer.pop();
+                //     answer.unshift(num);
+                // }
+
+                // for(const num of arr){
+                //     let idx = answer.indexOf(num);
+                    
+                    
+                //     if(idx > -1){
+                //         cacheHit(idx, num);  
+                //     } else {
+                        
+                //         if(answer.length >= m){
+                //             cacheMiss(num)
+                //         } else {
+                //             answer.unshift(num);
+                //         }
+                //     }
+                // }
+
+                return answer;
+            }
+            console.log(solution4([1,2,3,2,6,2,3,5,7], 5))
+        </script>
+    </body>
+</html>
