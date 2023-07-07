@@ -72,7 +72,7 @@
             console.log(solution3([11,7,5,6,10,9]));
 
             function solution4(arr, m){
-                let answer = [];
+                let answer = Array.from({length:m},()=>0);
 
                 
                 arr.forEach(v => {
@@ -86,20 +86,15 @@
                     }
 
                     if(flag){
-                        // Cache Hit
                         for(let i=idx-1;i>=0;i--){
                             answer[i+1] = answer[i];
                         }
                     } else {
-                        // Cache Miss
-                        if(answer.length >= m){
-                            for(let i=answer.length-2;i>=0;i--){
-                                answer[i+1] = answer[i];
-                            }
-                        } else {
-                            answer.unshift(v);
+                        for(let i=m-1;i>=1;i--){
+                            answer[i] = answer[i-1];
                         }
                     }
+                    
                     answer[0] = v;
                 })
 
@@ -107,12 +102,12 @@
                 //     for(let i=id-1;i>=0;i--){
                 //         answer[i+1] = answer[i];
                 //     }
-                //     answer[0] = num;
                 // }
 
                 // function cacheMiss(num){
-                //     answer.pop();
-                //     answer.unshift(num);
+                //     for(let i=m-1;i>=1;i--){
+                //         answer[i] = answer[i-1];
+                //     }
                 // }
 
                 // for(const num of arr){
@@ -120,20 +115,209 @@
                     
                     
                 //     if(idx > -1){
+                //         console.log('hit')
                 //         cacheHit(idx, num);  
                 //     } else {
-                        
-                //         if(answer.length >= m){
-                //             cacheMiss(num)
-                //         } else {
-                //             answer.unshift(num);
-                //         }
+                //         console.log('miss')
+                //         cacheMiss(idx, num); 
                 //     }
+
+                //     answer[0] = num;
+                //     console.log(answer)
                 // }
 
                 return answer;
             }
-            console.log(solution4([1,2,3,2,6,2,3,5,7], 5))
+            console.log(solution4([1,2,3,2,6,2,3,5,7], 5));
+
+            function solution5(arr){
+                let answer = "";
+                let newArr = [...arr].sort((a,b)=>a-b);
+                for(let i=0;i<newArr.length;i++){
+                    if(newArr[i] !== arr[i]){
+                        answer += i+1 + " ";
+                    }
+                }
+                return answer;
+            }
+            console.log(solution5([120,130,150,150,130,150]));
+
+            function solution6(arr){
+                let answer = arr;
+                arr.sort((a,b)=>{
+                    if(a[0] === b[0]) return a[1] - b[1];
+                    else return a[0] - b[0];
+                })
+                return answer;
+            }
+            console.log(solution6([[2,7],[1,3],[1,2],[2,5],[3,6]]));
+
+            function solution7(arr){
+                let answer = 0;
+                
+                let sortArr = [...arr].sort((a,b)=>{
+                    if(a[1] === b[1]) return a[0] - b[0];
+                    else return a[1] - b[1];
+                });
+
+                let timeEnd = 0;
+                for(let i=0;i<sortArr.length;i++){
+                    if(sortArr[i][0] >= timeEnd){
+                        timeEnd = sortArr[i][1];
+                        answer++;
+                    }
+                }
+
+                console.log(sortArr)
+                // for(let i=0;i<arr.length;i++){
+                //     let time = arr[i];
+                //     let cnt = 1;
+                //     for(let j=0;j<arr.length;j++){
+                //         if(i !== j && time[1] <= arr[j][0]){
+                //             cnt++;
+                //             time = arr[j];
+                //         }
+                //     }
+                //     answer = Math.max(answer, cnt);
+                // }
+                return answer;
+            }
+            console.log(solution7([[3,3],[1,3],[2,3]]));
+
+            function solution8(arr){
+                let answer = 0;
+                
+                let newArr = [];
+                for(const a of arr){
+                    newArr.push([a[0], 's']);
+                    newArr.push([a[1], 'e']);
+                }
+
+                newArr.sort((a,b)=>{
+                    if(a[0] === b[0]) return a[1].charCodeAt() - b[1].charCodeAt();
+                    else return a[0] - b[0];
+                });
+
+                let count = 0;
+                for(const a of newArr){
+                    if(a[1] === 's'){
+                        count++;
+                    } else if(a[1] === 'e'){
+                        count--
+                    }
+                    answer = Math.max(answer, count);
+                }
+                
+                // arr.sort((a,b)=>{
+                //     if(a[0] === b[0]) return a[1] - b[1];
+                //     else return a[0] - b[0]
+                // })
+                
+                // for(let i=0;i<arr.length;i++){
+                //     let s = arr[i][0];
+                //     let e = arr[i][1];
+                //     let cnt = 1;
+                //     for(let j=0;j<arr.length;j++){
+                //         if(i !== j && s <= arr[j][0] && arr[j][0] <= e-1){
+                //             cnt++;
+                //         }
+                //     }
+                //     answer = Math.max(answer, cnt)
+                // }
+
+                return answer;
+            }
+            console.log(solution8([[14,18],[12,15],[15,20],[20,30],[5,14]]))
+
+            function solution9(arr, m){
+                let answer;
+
+                arr.sort((a,b) => a-b);
+                let lt = 0;
+                let rt = arr.length-1;
+                while(lt<=rt){
+                    let mid = Math.floor((lt+rt)/2);
+                    if(arr[mid] === m){
+                        answer = mid + 1;
+                        break;
+                    } else if(arr[mid] > m){
+                        rt = mid-1;
+                    } else {
+                        lt = mid+1;
+                    }
+                    
+                }
+                return answer;
+            }
+            console.log(solution9([23,87,65,12,57,32,99,81], 32));
+
+            function count(mid, song){
+                let sum = mid;
+                let cnt = 1;
+                for(let num of song){
+                    if(sum - num >= 0){
+                        sum -= num;
+                    } else {
+                        cnt++;
+                        sum = mid;
+                        sum -= num;
+                    }
+                }
+
+                return cnt;
+            }
+
+            function solution10(arr, m){
+                let answer = Number.MAX_SAFE_INTEGER;
+
+                let lt = Math.max(...arr);
+                let rt = arr.reduce((prev,cur)=>prev+cur, 0);
+                while(lt<=rt){
+                    let mid = parseInt((lt+rt)/2);
+                    if(count(mid, arr) <= m){
+                        answer = Math.min(mid, answer);
+                        rt = mid - 1;
+                    } else {
+                        lt = mid + 1;
+                    }
+                }
+
+                return answer;
+            }
+            console.log(solution10([1,2,3,4,5,6,7,8,9], 3));
+
+
+            function chk(mid,arr){
+                let ep = arr[0];
+                let cnt = 1;
+                for(let i=1;i<arr.length;i++){
+                    if(arr[i] - ep >= mid){
+                        cnt++;
+                        ep=arr[i];
+                    }
+                }
+
+                return cnt
+            }
+
+            function solution11(arr, m){
+                let answer;
+                let lt = 1;
+                let rt = Math.max(...arr);
+                arr.sort((a,b)=>a-b);
+                while(lt<=rt){
+                    let mid = parseInt((lt+rt)/2);
+                    console.log('fn',chk(mid,arr))
+                    if(chk(mid,arr) >= m){
+                        lt = mid + 1;
+                        answer = mid;
+                    } else {
+                        rt = mid - 1;
+                    }
+                }
+                return answer;
+            }
+            console.log(solution11([1,2,8,4,9],3))
         </script>
     </body>
 </html>
